@@ -39,6 +39,7 @@
 
 Структура проекта
 
+text
 github-repo-analyzer/
 ├── app.py                # Основное Flask-приложение
 ├── templates/
