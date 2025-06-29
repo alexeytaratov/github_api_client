@@ -25,8 +25,14 @@ def handle_github_error(response):
 
 # Получает данные из API GitHub.
 def fetch_github_data(url, params=None):
-    response = requests.get(url, headers=GITHUB_HEADERS, params=params)
-    return response if response.status_code == 200 else None
+    try:
+        response = requests.get(url, headers=GITHUB_HEADERS, params=params)
+        if response.status_code == 404:
+            return handle_github_error(response)
+        return response if response.status_code == 200 else None
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка запроса: {e}")
+        return None
 
 # Отображает главную страницу.
 @app.route('/')
@@ -34,27 +40,29 @@ def index():
     return render_template('index.html')
 
 # Получает основную информацию о репозитории.
-@app.route('/get_repo_info', methods=['POST'])
+@app.route("/get_repo_info", methods=["POST"])
 def get_repo_info():
-    repo_url = request.form.get('repo_url')
+    repo_url = request.form.get("repo_url")
     if not repo_url:
-        return jsonify({'error': 'Необходимо указать URL репозитория'}), 400
+        return jsonify({"error": "Необходимо указать URL репозитория"}), 400
     try:
         owner, repo = parse_repo_url(repo_url)
-        response = fetch_github_data(
-            f'https://api.github.com/repos/{owner}/{repo}'
-        )
+        response = fetch_github_data(f"https://api.github.com/repos/{owner}/{repo}")
+        if isinstance(response, tuple):
+            return response
         if not response:
-            return handle_github_error(response)
+            return jsonify({"error": "Не удалось получить данные"}), 500
         data = response.json()
-        return jsonify({
-            'name': data['name'],
-            'description': data.get('description', 'Нет описания'),
-            'stars': data['stargazers_count'],
-            'url': data['html_url']
-        })
+        return jsonify(
+            {
+                "name": data["name"],
+                "description": data.get("description", "Нет описания"),
+                "stars": data["stargazers_count"],
+                "url": data["html_url"],
+            }
+        )
     except Exception as e:
-        return jsonify({'error': f'Ошибка: {str(e)}'}), 500
+        return jsonify({"error": f"Ошибка: {str(e)}"}), 500
 
 # Ищет коммиты в репозитории.
 @app.route('/search_commits', methods=['POST'])
@@ -188,4 +196,4 @@ def get_commit_frequency():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
