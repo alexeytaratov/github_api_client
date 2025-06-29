@@ -26,18 +26,7 @@
 - Chart.js (визуализация графиков)
 - Docker (контейнеризация)
 
-## Установка и запуск
-
-### Вариант 1: С помощью Docker (рекомендуется)
-
-1. Установите Docker и Docker Compose
-2. Клонируйте репозиторий
-3. Выполните команду:
-   ```bash
-   docker-compose up -d
-Откройте в браузере: http://localhost:5000
-
-Структура проекта
+## Структура проекта
 
 ```
 github-repo-analyzer/
@@ -52,6 +41,17 @@ github-repo-analyzer/
 ├── requirements.txt      # Зависимости Python
 └── README.md             # Документация
 ```
+
+## Установка и запуск
+
+### Вариант 1: С помощью Docker (рекомендуется)
+
+1. Установите Docker и Docker Compose
+2. Клонируйте репозиторий
+3. Выполните команду:
+   ```bash
+   docker-compose up -d
+Откройте в браузере: http://localhost:5000
 
 Для запуска с Docker:
 
