@@ -45,6 +45,7 @@ github-repo-analyzer/
 ├── templates/
 │   └── index.html        # HTML шаблон
 ├── static/
+|   └── index.js          # JS
 │   └── style.css         # Стили CSS
 ├── Dockerfile            # Конфигурация Docker
 ├── docker-compose.yml    # Конфигурация Docker Compose
