@@ -50,6 +50,7 @@ github-repo-analyzer/
 ├── docker-compose.yml    # Конфигурация Docker Compose
 ├── requirements.txt      # Зависимости Python
 └── README.md             # Документация
+```
 
 Для запуска с Docker:
 
