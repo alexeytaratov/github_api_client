@@ -56,6 +56,7 @@ github-repo-analyzer/
 
 ```bash
 docker-compose up -d
+```
 
 Приложение будет доступно по адресу http://localhost:5000
 
@@ -63,6 +64,7 @@ docker-compose up -d
 
 ```bash
 docker-compose down
+```
 
 Для локального запуска без Docker:
 
