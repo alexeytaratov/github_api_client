@@ -39,7 +39,7 @@
 
 Структура проекта
 
-'''
+```
 github-repo-analyzer/
 ├── app.py                # Основное Flask-приложение
 ├── templates/
@@ -53,18 +53,18 @@ github-repo-analyzer/
 
 Для запуска с Docker:
 
-'''bash
+```bash
 docker-compose up -d
 
 Приложение будет доступно по адресу http://localhost:5000
 
 Для остановки:
 
-'''bash
+```bash
 docker-compose down
 
 Для локального запуска без Docker:
 
-'''bash
+```bash
 pip install -r requirements.txt
 python app.py
